@@ -11,14 +11,14 @@ void* producer(void* argument)
     auto* monitor = static_cast<Monitor*>(argument);
 
     for (int i = 1; i <= EVENTS_COUNT; ++i) {
-        sleep(1);   /* задержка 1 с между событиями */
+        sleep(1);   
 
         Payload* payload = new Payload{i * 10};
         Event*   e       = new Event{i, payload};
         monitor->provide(e);
     }
 
-    monitor->stop();   /* <-- обязательно: разбудить потребителя */
+    monitor->stop();   
     return nullptr;
 }
 
@@ -26,9 +26,9 @@ void* consumer(void* argument)
 {
     auto* monitor = static_cast<Monitor*>(argument);
 
-    /* честный цикл, без магической пятёрки */
+    
     while (monitor->consume()) {
-        /* вся обработка внутри consume() */
+        
     }
     return nullptr;
 }
